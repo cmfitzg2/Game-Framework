@@ -2,7 +2,6 @@ package src;
 
 import java.awt.Color;
 import java.awt.Font;
-//import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -29,10 +28,10 @@ public class Player extends Creature
 		bounds.height = 32;
 
 		//Animations
-		animDown = new Animation(175, Assets.player_down);
-		animLeft = new Animation(100, Assets.player_left);
-		animUp = new Animation(175, Assets.player_up);
-		animRight = new Animation(100, Assets.player_right);
+		animDown = new Animation(150, Assets.player_down);
+		animLeft = new Animation(150, Assets.player_left);
+		animUp = new Animation(150, Assets.player_up);
+		animRight = new Animation(150, Assets.player_right);
 
 		//ScreenOverlay
 		screenOverlay = new ScreenOverlay(handler);
@@ -106,30 +105,25 @@ public class Player extends Creature
 				bounds.width, bounds.height);
 	}
 
-	private void checkInteraction()
-	{
+	private void checkInteraction() {
 		Rectangle collisionBounds = getCollisionBounds(0,0);
 		interactionRectangle = new Rectangle();
 		int interactionSize = 20;
 		interactionRectangle.width = interactionSize;
 		interactionRectangle.height = interactionSize;
-		if(up)
-		{
+		if (up) {
 			interactionRectangle.x = collisionBounds.x + collisionBounds.width/2 - interactionSize/2;
 			interactionRectangle.y = collisionBounds.y - interactionSize;
 		}
-		else if(down)
-		{
+		else if (down) {
 			interactionRectangle.x = collisionBounds.x + collisionBounds.width/2 - interactionSize/2;
 			interactionRectangle.y = collisionBounds.y + collisionBounds.height;
 		}
-		else if(left)
-		{
+		else if (left) {
 			interactionRectangle.x = collisionBounds.x - interactionSize;
 			interactionRectangle.y = collisionBounds.y + collisionBounds.height/2 - interactionSize/2;
 		}
-		else if(right)
-		{
+		else if (right) {
 			interactionRectangle.x = collisionBounds.x + collisionBounds.width;
 			interactionRectangle.y = collisionBounds.y + collisionBounds.height/2 - interactionSize/2;
 		}
@@ -137,13 +131,11 @@ public class Player extends Creature
 
 
 	@Override
-	public void die()
-	{
+	public void die() {
 		System.out.println("you lose");
 	}
 
-	private void getInput()
-	{
+	private void getInput() {
 		xMove = 0;
 		yMove = 0;
 		runSpeed = 8.0f;
@@ -268,22 +260,17 @@ public class Player extends Creature
 		else return "right";
 	}
 
-	public void setDirection(String dir)
-	{
-		if(dir.equals(up))
-		{
+	public void setDirection(String dir) {
+		if(dir.equals("up")) {
 			up = true; down = false; left = false; right = false;
 		}
-		if(dir.equals(down))
-		{
+		if(dir.equals("down")) {
 			down = true; left = false; right = false; up = false;
 		}
-		if(dir.equals(left))
-		{
+		if(dir.equals("left")) {
 			left = true; down = false; up = false; right = false;
 		}
-		if(dir.equals(right))
-		{
+		if(dir.equals("right")) {
 			right = true; up = false; down = false; left = false;
 		}
 	}

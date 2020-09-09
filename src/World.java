@@ -7,6 +7,9 @@ public class World
 	private Handler handler;
 	private int width, height, spawnX, spawnY;
 	private int[][] tiles;
+	private boolean world1_1 = false;
+	private boolean world2_1 = false;
+	private boolean firstTime = true;
 	//Entities
 	private EntityManager entityManager;
 	
@@ -17,7 +20,22 @@ public class World
 	public World(Handler handler, String path)
 	{
 		this.handler = handler;
-		entityManager = new EntityManager(handler, new Player(handler, 576, 511));
+		entityManager = new EntityManager(handler, new Player(handler, 625, 375));
+		
+		if(path.equals("world1.txt"))
+		{
+			firstTime = true;
+			world1_1 = true;
+			world2_1 = false;
+		}
+		
+		if(path.equals("world2.txt"))
+		{
+			firstTime = true;
+			world1_1 = false;
+			world2_1 = true;
+		}
+		
 		loadWorld(path);
 		//entityManager.getPlayer().setX(spawnX);
 		//entityManager.getPlayer().setY(spawnY);
@@ -26,10 +44,23 @@ public class World
 	
 	public void tick()
 	{
+		if(firstTime)
+		{
+			if(world1_1)
+			{
+				entityManager.addEntity(new Follower(handler, 875, 575));
+				firstTime = false;
+			}
+			if(world2_1)
+			{
+				firstTime = false;
+			}
+			
+		}
 		entityManager.tick();
 	}
 	
-	public void render(Graphics graphics)
+	public void render(Graphics g)
 	{
 		int xStart = (int) Math.max(0, handler.getGameCamera().getxOffset() / Tile.TILEWIDTH);
 		int xEnd = (int) Math.min(width, (handler.getGameCamera().getxOffset() + handler.getWidth()) / Tile.TILEWIDTH + 1);
@@ -40,21 +71,21 @@ public class World
 		{
 			for(int x=xStart; x<xEnd; x++)
 			{
-				getTile(x,y).render(graphics, (int) (x*Tile.TILEWIDTH - handler.getGameCamera().getxOffset()),
+				getTile(x,y).render(g, (int) (x*Tile.TILEWIDTH - handler.getGameCamera().getxOffset()),
 										(int) (y*Tile.TILEHEIGHT - handler.getGameCamera().getyOffset()));
 			}
 		}
-		entityManager.render(graphics);
+		entityManager.render(g);
 	}
 	
 	public Tile getTile(int x, int y)
 	{
 		if(x<0 || y<0 || x>=width || y>=height)
-			return Tile.grassTile;
+			return Tile.black;
 		
 		Tile t = Tile.tiles[tiles[x][y]];
 		if(t==null)
-			return Tile.dirtTile;
+			return Tile.black;
 		return t;
 	}
 	

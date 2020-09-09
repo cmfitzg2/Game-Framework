@@ -13,7 +13,7 @@ public class KeyManager implements KeyListener{
 	{
 		keys = new boolean[256];
 	}
-	
+
 	public void tick()
 	{
 		up		= keys[KeyEvent.VK_UP];
@@ -31,21 +31,21 @@ public class KeyManager implements KeyListener{
 		four	= keys[KeyEvent.VK_4];
 		five	= keys[KeyEvent.VK_5];
 		six		= keys[KeyEvent.VK_6];
-		
-	}
-	
-	@Override
-	public void keyPressed(KeyEvent e) 
-	{
-		if(e.getKeyCode() <= 256)
-		keys[e.getKeyCode()] = true;
+
 	}
 
 	@Override
-	public void keyReleased(KeyEvent e) 
+	public void keyPressed(KeyEvent e)
 	{
 		if(e.getKeyCode() <= 256)
-		keys[e.getKeyCode()] = false;
+			keys[e.getKeyCode()] = true;
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e)
+	{
+		if(e.getKeyCode() <= 256)
+			keys[e.getKeyCode()] = false;
 		if(e.getKeyCode() == KeyEvent.VK_Z)
 			stillHoldingZ = false;
 		if(e.getKeyCode() == KeyEvent.VK_C)
@@ -65,21 +65,21 @@ public class KeyManager implements KeyListener{
 	}
 
 	@Override
-	public void keyTyped(KeyEvent e) 
+	public void keyTyped(KeyEvent e)
 	{
-		
+
 	}
-	
-	public boolean isStillHoldingZ() 
+
+	public boolean isStillHoldingZ()
 	{
 		return stillHoldingZ;
 	}
 
-	public void setStillHoldingZ(boolean stillHoldingZ) 
+	public void setStillHoldingZ(boolean stillHoldingZ)
 	{
 		this.stillHoldingZ = stillHoldingZ;
 	}
-	
+
 	public boolean isStillHoldingC()
 	{
 		return stillHoldingC;

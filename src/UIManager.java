@@ -24,11 +24,11 @@ public class UIManager
 		}
 	}
 	
-	public void render(Graphics graphics)
+	public void render(Graphics g)
 	{
 		for(UIObject o : objects)
 		{
-			o.render(graphics);
+			o.render(g);
 		}
 	}
 	

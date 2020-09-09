@@ -6,10 +6,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-public class GameState extends State
-{
+public class GameState extends State {
 	private ScreenOverlay screenOverlay;
-	private Hud hud;
 	private long startTime;
 	private World world1, world2;
 	private Rectangle loadZoneWest, loadZoneEast, loadZoneNorth, loadZoneSouth;
@@ -17,31 +15,30 @@ public class GameState extends State
 	static AudioClip overworldMusic;
 	static AudioClip overworldMusicLoop;
 	boolean switcher = false;
-	
+
 	public GameState(Handler handler)
 	{
 		super(handler);
 		world1 = new World(handler,"world1.txt");
 		world2 = new World(handler,"world2.txt");
 		screenOverlay = new ScreenOverlay(handler);
-		hud = new Hud(handler);
 		handler.setWorld(world1);
 	}
-	
-	
-	
+
+
+
 	@Override
-	public void tick() 
-	{		
+	public void tick()
+	{
 		getLoadZones();
-		
+
 		if(firstTime)
 		{
 			world1.tick();
 			world2.tick();
 			firstTime = false;
 		}
-		
+
 		if(handler.getWorldNumber() == 1)
 		{
 			world1.tick();
@@ -53,14 +50,13 @@ public class GameState extends State
 				justTransitioned = true;
 				world2.tick();
 			}
-			hud.tick();
 		}
-		
-		
+
+
 		else if(handler.getWorld() == world2)
 		{
 			world2.tick();
-			
+
 			if(Player.playerRec.intersects(loadZoneEast))
 			{
 				handler.setWorld(world1);
@@ -68,18 +64,17 @@ public class GameState extends State
 				justTransitioned = true;
 				world1.tick();
 			}
-			hud.tick();
 		}
 	}
 	private boolean firstTime = true, justTransitioned = false;
 	private int alpha = 255;
-	
+
 	@Override
 	public void render(Graphics graphics)
 	{
-		
+
 		if(handler.getWorldNumber() == 1)
-		{			
+		{
 			world1.render(graphics);
 			if(justTransitioned)
 			{
@@ -88,11 +83,10 @@ public class GameState extends State
 				justTransitioned = false;
 			}
 			graphics.drawRect((int) -handler.getGameCamera().getxOffset(),(int) (511 - handler.getGameCamera().getyOffset()),10,64);
-			hud.render(graphics);
 		}
-		
-		
-		
+
+
+
 		else if(handler.getWorldNumber() == 2)
 		{
 			world2.render(graphics);
@@ -103,11 +97,10 @@ public class GameState extends State
 				justTransitioned = false;
 			}
 			graphics.drawRect((int) (1200 - handler.getGameCamera().getxOffset()),(int) (320 - handler.getGameCamera().getyOffset()),10,64);
-			hud.render(graphics);
 		}
 		graphics.setColor(Color.BLACK);
 	}
-	
+
 	private void getLoadZones()
 	{
 		if(handler.getWorldNumber() == 1)
@@ -118,37 +111,23 @@ public class GameState extends State
 		{
 			loadZoneEast = new Rectangle((int) (1200 - handler.getGameCamera().getxOffset()),(int) (320 - handler.getGameCamera().getyOffset()),10,64);
 		}
-		
+
 	}
 
-	private int getWorldTemperature()
-	{
-		if(handler.getWorldNumber() == 1)
-		{
-			return 0;
-		}
-		else if(handler.getWorldNumber() == 2)
-		{
-			return 1;
-		}
-
-		else return 0;
-	}
-	
 	public void playMusic()
 	{
 		playStarted = true;
 		overworldMusic = Applet.newAudioClip(getClass().getResource("/res/sounds/ocean.au"));
 		overworldMusicLoop = Applet.newAudioClip(getClass().getResource("/res/sounds/ocean.au"));
-		
+
 		overworldMusic.play();
 		startTime = System.currentTimeMillis();
 	}
-	
+
 	public static void stopMusic()
 	{
 		playStarted = false;
 		overworldMusic.stop();
 	}
-	
+
 }

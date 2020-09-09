@@ -23,7 +23,7 @@ public abstract class UIObject
 
 	public abstract void tick();
 	
-	public abstract void render(Graphics graphics);
+	public abstract void render(Graphics g);
 	
 	public abstract void onClick();
 	

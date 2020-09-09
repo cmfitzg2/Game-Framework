@@ -23,15 +23,15 @@ public class UIImageButton extends UIObject
 	}
 
 	@Override
-	public void render(Graphics graphics)
+	public void render(Graphics g) 
 	{
 		if(hovering)
 		{
-			graphics.drawImage(images[0], (int) x, (int) y, width, height, null);
-			graphics.drawImage(images[1], 350, 274, 32, 32, null);
+			g.drawImage(images[0], (int) x, (int) y, width, height, null);
+			g.drawImage(images[1], 350, 274, 32, 32, null);
 		}
 		else
-			graphics.drawImage(images[0], (int) x, (int) y, width, height, null);
+			g.drawImage(images[0], (int) x, (int) y, width, height, null);
 	}
 
 	@Override

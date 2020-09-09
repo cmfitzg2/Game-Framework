@@ -25,7 +25,7 @@ public class MenuState extends State
 	}
 
 	@Override
-	public void tick() 
+	public void tick()
 	{
 		if(handler.getKeyManager().esc)
 		{
@@ -50,7 +50,7 @@ public class MenuState extends State
 		graphics.setColor(Color.WHITE);
 		graphics.setFont(Assets.philosopher);
 		fm = graphics.getFontMetrics();
-		graphics.drawString("Quire", handler.getWidth()/2 - fm.stringWidth("Quire")/2, handler.getHeight()/2 + fm.getAscent()/4);
+		graphics.drawString("GAME TITLE", handler.getWidth()/2 - fm.stringWidth("GAME TITLE")/2, handler.getHeight()/2 + fm.getAscent()/4);
 		if(fadeIn)
 		{
 			if(alpha>0) {
@@ -78,5 +78,5 @@ public class MenuState extends State
 			}
 		}
 	}
-	
+
 }

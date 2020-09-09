@@ -3,8 +3,7 @@ package src;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-public abstract class Entity 
-{
+public abstract class Entity {
 	public static final int DEFAULT_HEALTH = 10;
 	protected int health;
 	protected Handler handler;
@@ -29,7 +28,7 @@ public abstract class Entity
 	
 	public abstract void tick();
 	
-	public abstract void render(Graphics graphics);
+	public abstract void render(Graphics g);
 	
 	public abstract void die();
 	

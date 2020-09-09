@@ -15,7 +15,7 @@ public class EntityManager
 	{
 		@Override
 		public int compare(Entity a, Entity b)
-		{
+		{	
 			if(a.getY() + a.getHeight() < b.getY() + b.getHeight())
 				return -1;
 			return 1;
@@ -43,18 +43,18 @@ public class EntityManager
 		Collections.sort(entities, renderSorter);
 	}
 	
-	public void render(Graphics graphics)
+	public void render(Graphics g)
 	{
 		for(Entity e : entities)
 		{
 			if(e.isFirstRender())
-				e.render(graphics);
+				e.render(g);
 		}
 		
 		for(Entity e : entities)
 		{
 			if(!e.isFirstRender())
-				e.render(graphics);
+				e.render(g);
 		}
 	}
 

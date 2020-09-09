@@ -1,7 +1,5 @@
 package src;
 
-public interface ClickListener 
-{
+public interface ClickListener {
 	public void onClick();
-	
 }

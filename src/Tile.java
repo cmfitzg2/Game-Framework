@@ -3,16 +3,17 @@ package src;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-public class Tile 
-{
+public class Tile {
 	
 	//STATIC STUFF HERE
 	
 	public static Tile[] tiles = new Tile[256];
-	public static Tile grassTile = new GrassTile(0);
-	public static Tile dirtTile = new DirtTile(1);
+	public static Tile grass = new GrassTile(0);
+	public static Tile dirt = new DirtTile(1);
 	public static Tile rock = new RockTile(2);
 	public static Tile water = new WaterTile(3);
+	public static Tile black = new BlackTile(4);
+	public static Tile gray = new GrayTile(5);
 	
 	//CLASS
 	
@@ -35,9 +36,9 @@ public class Tile
 		
 	}
 	
-	public void render(Graphics graphics, int x, int y)
+	public void render(Graphics g, int x, int y)
 	{
-		graphics.drawImage(texture, x, y, TILEWIDTH, TILEHEIGHT, null);
+		g.drawImage(texture, x, y, TILEWIDTH, TILEHEIGHT, null);
 	}
 	
 	public boolean isSolid()

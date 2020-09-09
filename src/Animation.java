@@ -2,14 +2,12 @@ package src;
 
 import java.awt.image.BufferedImage;
 
-public class Animation 
-{
+public class Animation {
 	private int speed, index;
 	private long lastTime, timer;
 	private BufferedImage[] frames;
 	
-	public Animation(int speed, BufferedImage[] frames)
-	{
+	public Animation(int speed, BufferedImage[] frames) {
 		this.speed = speed;
 		this.frames = frames;
 		index = 0;
@@ -17,13 +15,11 @@ public class Animation
 		lastTime = System.currentTimeMillis();
 	}
 	
-	public void tick()
-	{
+	public void tick() {
 		timer += System.currentTimeMillis() - lastTime;
 		lastTime = System.currentTimeMillis();
 		
-		if(timer>speed)
-		{
+		if(timer>speed) {
 			index++;
 			timer = 0;
 			if(index>=frames.length)
@@ -31,12 +27,19 @@ public class Animation
 		}
 	}
 	
-	public BufferedImage getCurrentFrame()
-	{
+	public BufferedImage getCurrentFrame() {
 		return frames[index];
 	}
 
 	public int getIndex() {
 		return index;
+	}
+	
+	public void setIndex(int index) {
+		this.index = index;
+	}
+
+	public BufferedImage getDefaultFrame() {
+		return frames[0];
 	}
 }
