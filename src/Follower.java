@@ -4,7 +4,7 @@ import java.awt.Graphics;
 
 public class Follower extends Creature {
 	private Animation animDown, animUp, animLeft, animRight;
-	private boolean down = false, up = false, left = false, right = false, interactedWith = false, xFurther = false, yFurther = false;
+	private boolean down = false, up = false, left = false, right = false, interactedWith = false;
 	private int id = 0;
 	private float playerX = 0, playerY = 0, distanceThreshold = 64;
 
@@ -24,7 +24,6 @@ public class Follower extends Creature {
 
 	@Override
 	public void tick() {
-		xFurther = false; yFurther = false;
 		playerX = handler.getWorld().getEntityManager().getPlayer().x;
 		playerY = handler.getWorld().getEntityManager().getPlayer().y;
 
